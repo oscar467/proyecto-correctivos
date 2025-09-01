@@ -17,7 +17,7 @@ const NitScreen: React.FC<NitScreenProps> = ({ onNext }) => {
   return (
     <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg">
       <div className="text-center">
-        <img className="w-72 h-36 mx-auto text-blue-600 rounded-lg" src="src/assets/logo.gif" alt="Logo" />
+        <img className="w-72 h-36 mx-auto text-blue-600 rounded-lg" src="/logo.gif" alt="Logo" />
         <h1 className="mt-4 text-3xl font-bold text-gray-800">Bienvenido</h1>
         <p className="text-gray-500">Ingresa el NIT de tu empresa</p>
       </div>
