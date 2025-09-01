@@ -4,7 +4,7 @@ import React from 'react';
 type IconProps = React.SVGProps<SVGSVGElement>;
 
 export const BusIcon = (props: IconProps) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width={props.width || 24} height={props.height || 24} {...props}>
         <path fill="#87a6ba" d="m57.56 55.06-3.38 3.31H9.81l-3.38-3.31.72-16.35s5.55 4.95 24.84 4.95 24.84-4.95 24.84-4.95l.72 16.35z" data-original="#87a6ba" />
         <path fill="#e2fcfd" d="M44.29 51.2s-.71-3.32 1.16-4.09c5.56-2.27 7.81-3.38 8.68-3.86.25-.14.56.04.56.33 0 1.08-.32 3.34-2.74 5.07-3.3 2.36-7.65 2.55-7.65 2.55zm-24.58 0s.71-3.32-1.16-4.09c-5.56-2.27-7.81-3.38-8.68-3.86a.376.376 0 0 0-.56.33c0 1.08.32 3.34 2.74 5.07 3.3 2.36 7.65 2.55 7.65 2.55z" data-original="#e2fcfd" />
         <path fill="#0b2037" d="M56.84 38.71S51.29 43.66 32 43.66 7.16 38.71 7.16 38.71l.24-5.48c.02.14.27 1.64 3.73 2.65C15.41 37.11 32 37.11 32 37.11s16.6 0 20.87-1.23c3.46-1 3.71-2.5 3.73-2.65z" data-original="#0b2037" />
@@ -59,5 +59,54 @@ export const IdCardIcon = (props: IconProps) => (
       <rect x="3" y="5" width="18" height="14" rx="2" />
       <path d="M7 9h.01M7 15h10M11 9h6" />
     </g>
+  </svg>
+);
+
+export const MantenimientoCorrectivoIcon = (props: IconProps) => (
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 16.933 16.933" {...props}>
+    <g transform="matrix(0.028204, 0, 0, 0.028204, 4.648862, 0.625259)" style={{}}>
+      <path fill="#463c4b" d="M120 248H88v-88c0-4.243 1.686-8.313 4.687-11.313l56-56c3-3.001 7.07-4.687 11.313-4.687h88v32h-81.373L120 166.627z" opacity="1" data-original="#463c4b" className=""></path>
+      <path fill="#463c4b" d="M120 488h272c17.673 0 32-14.327 32-32V120c0-17.673-14.327-32-32-32H245.255a31.996 31.996 0 0 0-22.627 9.373L97.373 222.627A32 32 0 0 0 88 245.255V456c0 17.673 14.327 32 32 32z" opacity="1" data-original="#463c4b" className=""></path>
+      <path fill="#555a6e" d="M328 120c0-17.673-14.327-32-32-32h-50.745a32 32 0 0 0-22.627 9.373L97.373 222.627A31.998 31.998 0 0 0 88 245.255V456c0 17.673 14.327 32 32 32h176c17.673 0 32-14.327 32-32z" opacity="1" data-original="#555a6e" className=""></path>
+      <path d="M136 424V258.509c0-4.243 1.686-8.313 4.686-11.314l106.509-106.509A15.998 15.998 0 0 1 258.509 136H272a8 8 0 0 1 8 8v280c0 8.837-7.163 16-16 16H152c-8.837 0-16-7.163-16-16z" opacity="1" data-original="#d7e6f0" className="" style={{fill: "rgb(143, 212, 219)"}}></path>
+      <path fill="#f04b37" d="M384 72H272a8 8 0 0 1-8-8V32a8 8 0 0 1 8-8h112a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8z" opacity="1" data-original="#f04b37"></path>
+      <path fill="#d73228" d="M384 72h-56V40a8 8 0 0 1 8-8h56v32a8 8 0 0 1-8 8z" opacity="1" data-original="#d73228"></path>
+      <path fill="#463c4b" d="M280 72h96v16h-96z" opacity="1" data-original="#463c4b" className=""></path>
+      <path fill="#f5871e" d="M218.458 253.154A13.177 13.177 0 0 0 208 248c-4.1 0-7.961 1.902-10.458 5.154C187.079 266.781 160 304.334 160 328c0 26.51 21.49 48 48 48s48-21.49 48-48c0-23.666-27.079-61.219-37.542-74.846z" opacity="1" data-original="#f5871e"></path>
+      <path fill="#fabe19" d="M184 336a8 8 0 0 1-8-8c0-10.553 9.514-30.422 25.45-53.149a8 8 0 1 1 13.1 9.186C198.122 307.466 192 323.437 192 328a8 8 0 0 1-8 8z" opacity="1" data-original="#fabe19"></path>
+    </g>
+    <g style={{}} transform="matrix(0.803767, 0, 0, 0.803767, -0.069346, 3.392273)">
+      <path d="M2.355.53a.265.265 0 0 0-.162.451L3.97 2.755v.576l-.639.638h-.574L.98 2.194a.265.265 0 0 0-.45.187V4.5a.265.265 0 0 0 .077.185L1.93 6.008a.265.265 0 0 0 .187.077h2.006l6.724 6.724v2.008a.265.265 0 0 0 .079.187l1.322 1.323a.265.265 0 0 0 .187.078h2.118a.265.265 0 0 0 .185-.453l-1.773-1.774v-.574l.638-.64h.575l1.775 1.775a.265.265 0 0 0 .451-.188v-2.115a.265.265 0 0 0-.078-.187l-1.322-1.325a.265.265 0 0 0-.188-.076h-2.005L6.086 4.123V2.116a.265.265 0 0 0-.078-.186L4.686.606A.265.265 0 0 0 4.498.53H2.38a.265.265 0 0 0-.026 0z" opacity="1" data-original="#33658a" className="" style={{fill: "rgb(153, 156, 157)"}}></path>
+      <path d="M15.316.53a.272.272 0 0 0-.09.027l-2.644 1.322a.265.265 0 0 0-.146.237v.949L5.898 9.602l1.432 1.434 6.537-6.538h.95c.1 0 .191-.056.236-.146l1.324-2.647a.265.265 0 0 0-.05-.304l-.794-.795a.265.265 0 0 0-.217-.076z" opacity="1" data-original="#dbe9ee" style={{fill: "rgb(219, 231, 235)"}}></path>
+      <path fill="#33b9ef" d="M5.553 8.995a.265.265 0 0 0-.184.078L1.092 13.35c-.718.717-.76 1.864-.067 2.557.693.693 1.84.65 2.557-.067l4.277-4.277a.265.265 0 0 0 0-.373L5.744 9.073a.265.265 0 0 0-.191-.078z" opacity="1" data-original="#33b9ef" className=""></path>
+      <path fill="#2fa9da" d="m4.575 9.867 2.49 2.49.794-.794a.265.265 0 0 0 0-.373L5.744 9.072a.265.265 0 0 0-.191-.078.265.265 0 0 0-.184.078z" opacity="1" data-original="#2fa9da"></path>
+    </g>
+  </svg>
+);
+
+export const IconoCheckList = (props: IconProps) => (
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 60 60" {...props}>
+    <defs></defs>
+    <g style={{}} transform="matrix(1.249514, 0, 0, 1.249514, -0.767152, -13.322035)">
+      <g style={{}} transform="matrix(0.830254, 0, 0, 0.830254, -0.216294, 9.821985)">
+        <path fill="#cb8252" d="M32 5h10a3 3 0 0 1 3 3v48a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z" opacity="1" data-original="#cb8252" className=""></path>
+        <path fill="#ecf0f1" d="M32 9h9V55H5V9h9z" opacity="1" data-original="#ecf0f1" className=""></path>
+        <path fill="#95a5a5" d="M32 5v4a1 1 0 0 1-1 1H15a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h4.13a4 4 0 0 1 7.74 0H31a1 1 0 0 1 1 1z" opacity="1" data-original="#95a5a5"></path>
+        <rect width="9" height="9" x="9" y="14" fill="#d1d4d1" rx="1" opacity="1" data-original="#d1d4d1" className=""></rect>
+        <rect width="9" height="9" x="9" y="28" fill="#d1d4d1" rx="1" opacity="1" data-original="#d1d4d1" className=""></rect>
+        <rect width="9" height="9" x="9" y="42" fill="#d1d4d1" rx="1" opacity="1" data-original="#d1d4d1" className=""></rect>
+        <path fill="#4fba6f" d="M14 20a1 1 0 0 1-.707-.293l-1-1a1 1 0 0 1 1.414-1.414l.293.293 4.293-4.293a1 1 0 0 1 1.414 1.414l-5 5A1 1 0 0 1 14 20zM14 34a1 1 0 0 1-.707-.293l-1-1a1 1 0 0 1 1.414-1.414l.293.293 4.293-4.293a1 1 0 0 1 1.414 1.414l-5 5A1 1 0 0 1 14 34zM14 48a1 1 0 0 1-.707-.293l-1-1a1 1 0 0 1 1.414-1.414l.293.293 4.293-4.293a1 1 0 0 1 1.414 1.414l-5 5A1 1 0 0 1 14 48z" opacity="1" data-original="#4fba6f" className=""></path>
+        <g fill="#3f5c6c">
+          <path d="M36 17H23a1 1 0 0 1 0-2h13a1 1 0 0 1 0 2zM30 22h-7a1 1 0 0 1 0-2h7a1 1 0 0 1 0 2zM36 31H23a1 1 0 0 1 0-2h13a1 1 0 0 1 0 2zM30 36h-7a1 1 0 0 1 0-2h7a1 1 0 0 1 0 2zM34.91 45H23a1 1 0 0 1 0-2h11.91a1 1 0 0 1 0 2zM30 50h-7a1 1 0 0 1 0-2h7a1 1 0 0 1 0 2z" fill="#3f5c6c" opacity="1" data-original="#3f5c6c" className=""></path>
+        </g>
+        <path fill="#f9eab0" d="m41.51 47.51-.01.01-6.31 1.45a.969.969 0 0 1-1.17-1.15l1.47-6.32 3.01 3z" opacity="1" data-original="#f9eab0"></path>
+        <path fill="#f0c419" d="M51.74 31.26 38.5 44.5l-3.01-3v-.01l13.24-13.23z" opacity="1" data-original="#f0c419" className=""></path>
+        <path fill="#f29c1f" d="M38.493 44.5 51.73 31.264l3.01 3.01L41.501 47.51z" opacity="1" data-original="#f29c1f" className=""></path>
+      </g>
+    </g>
+    <rect width="19.369" height="19.369" x="34.102" y="8.52" fill="#d1d4d1" rx="1" opacity="1" data-original="#d1d4d1" className="" style={{strokeWidth: "8.533"}}></rect>
+    <path fill="#4fba6f" d="M 41.614 25.008 C 40.87 25.008 40.156 24.713 39.632 24.186 L 36.825 21.382 C 35.326 19.83 36.069 17.235 38.165 16.711 C 39.104 16.478 40.096 16.745 40.792 17.415 L 41.614 18.237 L 53.656 6.195 C 55.21 4.694 57.805 5.441 58.327 7.535 C 58.559 8.473 58.293 9.466 57.623 10.162 L 43.598 24.186 C 43.07 24.713 42.357 25.008 41.614 25.008 Z" opacity="1" data-original="#4fba6f" className="" style={{strokeWidth: "1"}}></path>
+    <path fill="#95a5a5" d="M 58.884 31.38 L 55.761 34.503 L 52.638 31.38 L 49.516 28.268 L 52.628 25.145 L 52.638 25.145 L 58.873 31.37 L 58.873 31.38 L 58.884 31.38 Z" opacity="1" data-original="#95a5a5"></path>
+    <path fill="#fb7b76" d="M 58.873 31.37 L 52.638 25.145 C 55.034 22.746 59.129 23.839 60.01 27.114 C 60.418 28.634 59.985 30.256 58.873 31.37 Z" opacity="1" data-original="#fb7b76" className="" style={{}}></path>
   </svg>
 );

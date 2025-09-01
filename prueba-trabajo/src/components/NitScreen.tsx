@@ -15,28 +15,36 @@ const NitScreen: React.FC<NitScreenProps> = ({ onNext }) => {
   };
 
   return (
-    <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg">
+    <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
       <div className="text-center">
-        <img className="w-72 h-36 mx-auto text-blue-600 rounded-lg" src="/logo.gif" alt="Logo" />
-        <h1 className="mt-4 text-3xl font-bold text-gray-800">Bienvenido</h1>
-        <p className="text-gray-500">Ingresa el NIT de tu empresa</p>
+        <img className="w-full mx-auto text-blue-600 rounded-lg shadow-xl p-4 mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
+        <h1 className="mt-4 text-4xl font-bold text-blue-700">Bienvenido</h1>
+        <h2 className="mt-none text-2xl font-bold text-blue-700">al Provedor Tecnologico</h2>
       </div>
       <form onSubmit={handleSubmit} className="space-y-6">
         <input
-          type="text"
+          type="tel" // Cambiado a 'tel' para teclado numérico en móviles
+          inputMode="numeric" // Sugiere un teclado numérico
+          pattern="[0-9]*" // Patrón para validación básica (no estricta)
           value={nit}
-          onChange={(e) => setNit(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            const numericValue = value.replace(/[^0-9]/g, ''); // Elimina caracteres no numéricos
+            setNit(numericValue);
+          }}
+          maxLength={10}
           placeholder="Escribe el NIT aquí"
-          className="w-full px-4 py-3 text-lg text-gray-700 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 text-lg text-gray-900 bg-gray-100 border-2 border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
         <button
           type="submit"
           disabled={!nit.trim()}
-          className="w-full py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300"
+          className="w-auto px-12 py-3 text-lg font-semibold text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed transition-all duration-300"
         >
           Siguiente
         </button>
       </form>
+      <img className="h-16 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_Calisoft" />
     </div>
   );
 };

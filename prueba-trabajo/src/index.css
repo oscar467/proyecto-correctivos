@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
+#root {
+    width: 100% !important;
+    height: 100% !important;
+}
 
 body {
-    background-color: #f7f8f8; /* Un gris claro como en tus imágenes */
+    background-color: #f7f8f8;
+    /* Un gris claro como en tus imágenes */
     display: flex;
     justify-content: center;
     align-items: center;

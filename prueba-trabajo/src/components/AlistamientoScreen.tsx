@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LicensePlateIcon, IdCardIcon } from './Icons'; // Importamos los nuevos iconos
 
 // Icono para el botón de "Volver"
@@ -12,13 +12,33 @@ interface AlistamientoScreenProps {
     onBackToMenu: () => void;
 }
 
+// Componente para animar la entrada de los campos
+    const AnimatedDiv: React.FC<{ show: boolean; children: React.ReactNode }> = ({ show, children }) => {
+        const [isVisible, setIsVisible] = useState(show); // Inicializa con el valor de show
+
+        useEffect(() => {
+            // Actualiza isVisible cuando la prop show cambia
+            const timer = setTimeout(() => setIsVisible(show), 50); 
+            return () => clearTimeout(timer);
+        }, [show]);
+
+        return (
+            <div
+                className={`transition-all duration-300 ease-in-out transform overflow-hidden
+                    ${isVisible ? 'opacity-100 translate-y-0 max-h-screen' : 'opacity-0 -translate-y-2 max-h-0'}`}
+            >
+                {children}
+            </div>
+        );
+    };
+
 const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu }) => {
     // --- ESTADO PARA LOS CAMPOS Y FUNCIONALIDADES ---
     const [numeroInterno, setNumeroInterno] = useState('');
     const [tipoDoc, setTipoDoc] = useState('');
     const [documento, setDocumento] = useState('');
-    const [showDetails, setShowDetails] = useState(false);
     const [detalles, setDetalles] = useState('');
+    const [currentStep, setCurrentStep] = useState(1); // Controla el paso actual del formulario
 
     // Lista de items de la checklist
     const checklistItems = [
@@ -35,6 +55,19 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
         "Botiquín"
     ];
 
+    // Lógica para avanzar al siguiente paso
+    useEffect(() => {
+        if (currentStep === 1 && numeroInterno.length > 2) {
+            setCurrentStep(2);
+        } else if (currentStep === 2 && tipoDoc && documento) {
+            setCurrentStep(3);
+        } else if (currentStep === 3 && checklistItems.every(() => true)) { // Asumiendo que la checklist siempre está "llena" para avanzar
+            setCurrentStep(4);
+        } else if (currentStep === 4) { // Después de los detalles, mostrar el botón
+            setCurrentStep(5);
+        }
+    }, [numeroInterno, tipoDoc, documento, currentStep]);
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         alert(`Formulario enviado.\nNúmero Interno: ${numeroInterno}\nDocumento: ${tipoDoc} ${documento}\nDetalles: ${detalles}`);
@@ -48,32 +81,32 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
     const placaSugerida = `ABC-123`;
     const nombreSugerido = "Juan Perez"; // Nombre de ejemplo
 
+    
+
     return (
-        // Contenedor exterior que asegura el mismo ancho y espaciado que el menú.
-        <div style={{ width: '145%', position: 'relative', left: '-22%', height: '90%' }} className='bg-gray-100 rounded-2xl p-4 max-h-full'>
-            <div className="w-full max-w-md mx-auto p-4">
-                <div className="w-full bg-white rounded-2xl shadow-lg flex flex-col max-h-[calc(100vh-4rem)] overflow-hidden">
+        <div className='w-full h-full max-w-md mx-none p-4 space-y-6 bg-white-100'>
+            <div className="w-full h-full bg-white rounded-2xl shadow-lg flex flex-col overflow-hidden">
+                {/* --- ENCABEZADO ACTUALIZADO --- */}
+                <header className="relative bg-blue-500 text-white p-4 flex items-center justify-center flex-shrink-0  rounded-2xl shadow-lg">
+                    <button
+                        onClick={onBackToMenu}
+                        className="absolute left-4 p-2 rounded-full hover:bg-blue-600 transition-colors flex items-center gap-2"
+                        aria-label="Volver al menú"
+                    >
+                        <BackArrowIcon />
+                    </button>
+                    <h1 className="text-xl font-bold flex items-center gap-2">
+                        <span role="img" aria-label="checklist icon">📋</span>
+                        Alistamiento Diario
+                    </h1>
+                </header>
 
-                    {/* --- ENCABEZADO ACTUALIZADO --- */}
-                    <header className="relative bg-blue-500 text-white p-4 flex items-center justify-center flex-shrink-0">
-                        <button
-                            onClick={onBackToMenu}
-                            className="absolute left-4 p-2 rounded-full hover:bg-blue-600 transition-colors flex items-center gap-2"
-                            aria-label="Volver al menú"
-                        >
-                            <BackArrowIcon />
-                        </button>
-                        <h1 className="text-xl font-bold flex items-center gap-2">
-                            <span role="img" aria-label="checklist icon">📋</span>
-                            Alistamiento Diario
-                        </h1>
-                    </header>
+                {/* --- CONTENIDO DEL FORMULARIO CON NUEVAS FUNCIONES --- */}
+                <main className="flex-grow p-6 space-y-6 overflow-y-auto">
+                    <form id="alistamiento-form" onSubmit={handleSubmit} className="space-y-5">
 
-                    {/* --- CONTENIDO DEL FORMULARIO CON NUEVAS FUNCIONES --- */}
-                    <main className="flex-grow p-6 space-y-6 overflow-y-auto">
-                        <form id="alistamiento-form" onSubmit={handleSubmit} className="space-y-5">
-
-                            {/* Campo Número Interno con icono y lógica */}
+                        {/* Campo Número Interno con icono y lógica */}
+                        <AnimatedDiv show={currentStep >= 1}>
                             <div>
                                 <label htmlFor="numero-interno" className="block text-sm font-semibold text-gray-600 mb-1">
                                     Número Interno
@@ -100,8 +133,10 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                                     </div>
                                 )}
                             </div>
+                        </AnimatedDiv>
 
-                            {/* Campo Tipo de Documento con icono */}
+                        {/* Campo Tipo de Documento con icono */}
+                        <AnimatedDiv show={currentStep >= 2}>
                             <div>
                                 <label htmlFor="tipoDoc" className="block text-sm font-semibold text-gray-600 mb-1">
                                     Tipo de Documento
@@ -124,8 +159,10 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                                     </select>
                                 </div>
                             </div>
+                        </AnimatedDiv>
 
-                            {/* Campo Número de Documento con icono y lógica */}
+                        {/* Campo Número de Documento con icono y lógica */}
+                        <AnimatedDiv show={currentStep >= 2}>
                             <div>
                                 <label htmlFor="documento" className="block text-sm font-semibold text-gray-600 mb-1">
                                     Número de Documento
@@ -151,8 +188,10 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                                     </div>
                                 )}
                             </div>
+                        </AnimatedDiv>
 
-                            {/* Checklist (sin cambios) */}
+                        {/* Checklist (sin cambios) */}
+                        <AnimatedDiv show={currentStep >= 3}>
                             <div className="bg-gray-50 p-5 rounded-xl border border-gray-200">
                                 <h3 className="text-center text-blue-600 font-bold text-lg mb-4">
                                     Checklist Actividades Minimas
@@ -166,18 +205,20 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                                     ))}
                                 </div>
                             </div>
+                        </AnimatedDiv>
 
-                            {/* --- FUNCIONALIDAD DE DETALLES --- */}
+                        {/* --- FUNCIONALIDAD DE DETALLES --- */}
+                        <AnimatedDiv show={currentStep >= 4}>
                             <div className="pt-2">
                                 <button
                                     type="button"
-                                    onClick={() => setShowDetails(!showDetails)}
-                                    className={`text-sm font-semibold p-2 rounded-md transition-colors ${showDetails ? 'text-red-600 hover:bg-red-50' : 'text-gray-500 hover:bg-gray-100'
+                                    onClick={() => setDetalles(detalles ? '' : ' ')} // Toggle para mostrar/ocultar textarea
+                                    className={`text-sm font-semibold p-2 rounded-md transition-colors ${detalles ? 'text-red-600 hover:bg-red-50' : 'text-gray-500 hover:bg-gray-100'
                                         }`}
                                 >
-                                    {showDetails ? 'Eliminar detalles' : 'Agregar detalles'}
+                                    {detalles ? 'Eliminar detalles' : 'Agregar detalles'}
                                 </button>
-                                {showDetails && (
+                                {detalles !== '' && ( // Mostrar textarea si detalles no está vacío
                                     <textarea
                                         value={detalles}
                                         onChange={(e) => setDetalles(e.target.value)}
@@ -187,15 +228,17 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                                     />
                                 )}
                             </div>
-                        </form>
-                    </main>
+                        </AnimatedDiv>
+                    </form>
+                </main>
 
-                    <footer className="p-6 flex justify-center flex-shrink-0 bg-white border-t border-gray-100">
-                        <button type="submit" form="alistamiento-form" className="w-full max-w-xs py-3 text-lg font-semibold text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 transition-all">
+                <footer className="p-6 flex justify-center flex-shrink-0 bg-white border-t border-gray-100">
+                    <AnimatedDiv show={currentStep >= 5}>
+                        <button type="submit" form="alistamiento-form" className="w-full max-w-xs py-3 px-8 text-lg font-semibold text-white bg-blue-500 rounded-full shadow-md hover:bg-blue-600 transition-all">
                             Enviar Alistamiento
                         </button>
-                    </footer>
-                </div>
+                    </AnimatedDiv>
+                </footer>
             </div>
         </div>
     );

@@ -19,11 +19,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg">
+    <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
       <div className="text-center">
-        <img className="w-48 h-24 mx-auto text-blue-600 rounded-lg" src="/logo.gif" alt="Logo" />
-        <h2 className="mt-4 text-3xl font-bold text-gray-800">Iniciar Sesión</h2>
-        <p className="text-gray-500">Usa tus credenciales para acceder</p>
+        <img className="w-full mx-auto text-blue-600 rounded-lg shadow-xl  border-blue-500 p-4 mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
+        <h2 className="mt-4 text-4xl font-bold text-blue-800">Iniciar Sesión</h2>
+        <p className="text-gray-500 mt-2">Usa tus credenciales para acceder</p>
       </div>
       <form onSubmit={handleLogin} className="space-y-4">
         <div className="relative">
@@ -35,7 +35,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Usuario"
-            className="w-full px-4 py-3 pl-10 text-lg text-gray-700 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 pl-10 text-lg text-gray-700 bg-gray-100 border-2 border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
         <div className="relative">
@@ -47,17 +47,18 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
-            className="w-full px-4 py-3 pl-10 text-lg text-gray-700 bg-gray-100 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 pl-10 text-lg text-gray-700 bg-gray-100 border-2 border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
         <button
           type="submit"
           disabled={!canLogin}
-          className="w-full py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300"
+          className="w-auto px-12 py-3 text-lg font-semibold text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300"
         >
           Ingresar
         </button>
       </form>
+      <img className="h-16 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_Calisoft" />
     </div>
   );
 };

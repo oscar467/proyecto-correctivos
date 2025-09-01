@@ -23,6 +23,10 @@ function App() {
     setCurrentView('LOGIN');
   };
   
+  const handleReturnToNitScreen = () => {
+    setCurrentView('NIT');
+  };
+  
   const handleLogin = (user: string) => {
     setUsername(user);
     setCurrentView('MENU');
@@ -48,7 +52,7 @@ function App() {
       case 'NIT':
         return <NitScreen onNext={handleNitSubmit} />;
       case 'CAPTCHA':
-        return <CaptchaScreen onNext={handleCaptchaSuccess} />;
+        return <CaptchaScreen onNext={handleCaptchaSuccess} onReturnToNitScreen={handleReturnToNitScreen} />;
       case 'LOGIN':
         return <LoginScreen onLogin={handleLogin} />;
       case 'MENU':
@@ -66,12 +70,9 @@ function App() {
   };
 
   return (
-    <>
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , width: '100%', height: '100%'}} >
-
+    <div className="flex justify-center items-center min-h-full bg-gray-100">
+        {renderView()}
     </div>
-      {renderView()}
-    </>
   );
 }
 
