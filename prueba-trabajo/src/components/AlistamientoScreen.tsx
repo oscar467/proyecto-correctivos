@@ -326,3 +326,4 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
 };
 
 export default AlistamientoScreen;
+
