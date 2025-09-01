@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+
+body {
+    background-color: #f7f8f8; /* Un gris claro como en tus imágenes */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}

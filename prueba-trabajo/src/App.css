@@ -1,0 +1,254 @@
+
+
+/* Menu Screen */
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  padding: 1rem 0;
+}
+
+.menu-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.logo-placeholder {
+  width: 60px;
+  height: 60px;
+  background-color: var(--light-blue);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-blue);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.company-info {
+  text-align: left;
+}
+
+.company-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.user-name {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0 1.5rem;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 10px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+}
+
+.menu-item:hover {
+  background-color: #f8f9fa;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item svg {
+  margin-right: 1rem;
+  color: var(--primary-blue);
+  width: 24px;
+  height: 24px;
+}
+
+.menu-item.logout {
+    color: var(--error-color);
+}
+.menu-item.logout svg {
+    color: var(--error-color);
+}
+
+
+/* Alistamiento Screen */
+.form-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.form-content {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.form-title {
+  text-align: center;
+  color: var(--dark-blue);
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.checklist-item label {
+  cursor: pointer;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--primary-blue);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 10px;
+  margin-top: 1rem;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* ========================================= */
+/* === NUEVOS ESTILOS PARA EL MENÚ GRID === */
+/* ========================================= */
+
+.menu-container-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+  gap: 1rem;
+}
+
+.menu-header-card {
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 1.25rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(0, 122, 255, 0.25);
+}
+
+/* Ajustes al logo y texto del header */
+.menu-header-card .logo-placeholder {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--dark-blue);
+  font-size: 0.8rem;
+}
+
+.menu-header-card .company-name {
+  color: white;
+  font-weight: 700;
+}
+
+.menu-header-card .user-name {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+
+/* Grid para las tarjetas de menú */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: var(--card-background);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  text-align: center;
+  border: 1px solid #eef2f7;
+  aspect-ratio: 1 / 1;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+}
+
+.menu-card-icon {
+  font-size: 2.8rem; /* Íconos (emojis) más grandes */
+  line-height: 1;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+}
+
+.menu-card-text {
+  font-weight: 600;
+  color: #444;
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+/* Estilo especial para la tarjeta de Cerrar Sesión */
+.menu-card.logout {
+  background-color: #ffebee; /* Rosa pálido */
+  border-color: #ffcdd2;
+}
+
+.menu-card.logout .menu-card-text {
+  color: #c62828; /* Rojo oscuro */
+  font-weight: 700;
+}
