@@ -3,7 +3,7 @@ import React from 'react';
 // Atajo para las props de los iconos
 type IconProps = React.SVGProps<SVGSVGElement>;
 
-export const BusIcon = (props: IconProps) => (
+export const BusIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
         <path fill="#87a6ba" d="m57.56 55.06-3.38 3.31H9.81l-3.38-3.31.72-16.35s5.55 4.95 24.84 4.95 24.84-4.95 24.84-4.95l.72 16.35z" data-original="#87a6ba" />
         <path fill="#e2fcfd" d="M44.29 51.2s-.71-3.32 1.16-4.09c5.56-2.27 7.81-3.38 8.68-3.86.25-.14.56.04.56.33 0 1.08-.32 3.34-2.74 5.07-3.3 2.36-7.65 2.55-7.65 2.55zm-24.58 0s.71-3.32-1.16-4.09c-5.56-2.27-7.81-3.38-8.68-3.86a.376.376 0 0 0-.56.33c0 1.08.32 3.34 2.74 5.07 3.3 2.36 7.65 2.55 7.65 2.55z" data-original="#e2fcfd" />

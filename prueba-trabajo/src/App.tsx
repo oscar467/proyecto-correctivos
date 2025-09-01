@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './App.css';
 import NitScreen from './components/NitScreen';
 import CaptchaScreen from './components/CaptchaScreen';

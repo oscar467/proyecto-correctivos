@@ -27,6 +27,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ username, companyName, onLogout
         </div>
         <div>
           <h2 className="font-bold text-xl">Empresa De Prueba</h2>
+          <h2 style={{ display: 'none' }}  className="font-bold text-xl hidden">{companyName}</h2>
           <p className="text-blue-100 text-sm">Bienvenido {username}!</p>
         </div>
       </header>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { BusIcon } from './Icons'; // Importamos el icono
 
 interface NitScreenProps {
   onNext: (nit: string) => void;
