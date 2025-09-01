@@ -30,8 +30,8 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ username, companyName, onLogout
   companyName = 'Empresa De Prueba';
 
   return (
-    <div className="w-full max-w-md h-screen flex flex-col p-4 gap-6 space-y-6 bg-white-100"> {/* Eliminado overflow-hidden */}
-      <div className="w-full h-full flex flex-col gap-4 bg-white rounded-2xl shadow-lg">
+    <div className="w-full max-w-md h-screen flex flex-col p-4 gap-6 space-y-6 bg-white-100">
+      <div className="w-full h-full flex flex-col gap-4 bg-white rounded-2xl shadow-lg max-h-[calc(100%-5%)]"> {/* Aplicado max-h con calc */}
       {/* --- HEADER CARD --- */}
         <header className="bg-blue-500 text-white p-5 rounded-2xl flex items-center gap-4 shadow-lg flex-shrink-0">
           <div className="bg-blue-400 w-16 h-16 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
