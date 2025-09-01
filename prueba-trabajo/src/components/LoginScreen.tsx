@@ -21,7 +21,8 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   return (
     <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
       <div className="text-center">
-        <img className="w-full mx-auto text-blue-600 rounded-lg shadow-xl  border-blue-500 p-4 mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
+        <img className="w-full mx-auto text-blue-600 rounded-full shadow-xl mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
+        <img className="w-full px-8 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_SuperTransporte" />
         <h2 className="mt-4 text-4xl font-bold text-blue-800">Iniciar Sesión</h2>
         <p className="text-gray-500 mt-2">Usa tus credenciales para acceder</p>
       </div>
@@ -58,7 +59,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
           Ingresar
         </button>
       </form>
-      <img className="h-16 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_Calisoft" />
     </div>
   );
 };

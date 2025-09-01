@@ -15,9 +15,10 @@ const NitScreen: React.FC<NitScreenProps> = ({ onNext }) => {
   };
 
   return (
-    <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
+    <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200 ">
       <div className="text-center">
-        <img className="w-full mx-auto text-blue-600 rounded-lg shadow-xl p-4 mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
+        <img className="w-full mx-auto text-blue-600 rounded-full shadow-xl mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
+        <img className="w-full px-8 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_SuperTransporte" />
         <h1 className="mt-4 text-4xl font-bold text-blue-700">Bienvenido</h1>
         <h2 className="mt-none text-2xl font-bold text-blue-700">al Provedor Tecnologico</h2>
       </div>
@@ -44,7 +45,7 @@ const NitScreen: React.FC<NitScreenProps> = ({ onNext }) => {
           Siguiente
         </button>
       </form>
-      <img className="h-16 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_Calisoft" />
+      
     </div>
   );
 };

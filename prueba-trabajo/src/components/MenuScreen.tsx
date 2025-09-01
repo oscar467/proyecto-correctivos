@@ -22,7 +22,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ username, companyName, onLogout
   companyName = 'Empresa De Prueba';
 
   return (
-    <div className="w-full h-screen flex flex-col p-4 gap-6 space-y-6 bg-white-100">
+    <div className="w-full max-w-md  h-screen flex flex-col p-4 gap-6 space-y-6 bg-white-100 overflow-hidden">
       <div className="w-full h-full flex flex-col gap-4 bg-white rounded-2xl shadow-lg">
       {/* --- HEADER CARD --- */}
         <header className="bg-blue-500 text-white p-5 rounded-2xl flex items-center gap-4 shadow-lg flex-shrink-0">
@@ -36,14 +36,14 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ username, companyName, onLogout
         </header>
 
         {/* --- MENU GRID --- */}
-        <main className="grid grid-cols-2 gap-4 flex-grow p-4">
+        <main className="grid grid-cols-2 gap-4 flex-grow p-4 overflow-y-auto">
           {menuOptions.map(option => (
             <div 
               key={option.label}
             onClick={option.implemented ? option.action : undefined} // Deshabilita el click si no está implementado
             className={`
               p-4 rounded-2xl shadow-md flex flex-col items-center justify-center gap-2 
-              aspect-square transition-transform duration-200
+              flex-grow transition-transform duration-200
               ${option.isLogout 
                 ? 'bg-red-100 text-red-600 font-bold' 
                 : option.implemented 

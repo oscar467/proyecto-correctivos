@@ -38,7 +38,11 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
     const [tipoDoc, setTipoDoc] = useState('');
     const [documento, setDocumento] = useState('');
     const [detalles, setDetalles] = useState('');
-    const [currentStep, setCurrentStep] = useState(1); // Controla el paso actual del formulario
+    // Estados para controlar la visibilidad de los campos
+    const [showTipoDoc, setShowTipoDoc] = useState(false);
+    const [showNumeroDoc, setShowNumeroDoc] = useState(false);
+    const [showNombreChecklist, setShowNombreChecklist] = useState(false);
+    const [showEnviarBoton, setShowEnviarBoton] = useState(false);
 
     // Lista de items de la checklist
     const checklistItems = [
@@ -54,29 +58,49 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
         "Equipo de carretera",
         "Botiquín"
     ];
+    // Estado para los checkboxes de la checklist
+    const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(checklistItems.length).fill(false));
 
-    // Lógica para avanzar al siguiente paso
+    // Lógica para controlar la visibilidad de los campos
     useEffect(() => {
-        if (currentStep === 1 && numeroInterno.length > 2) {
-            setCurrentStep(2);
-        } else if (currentStep === 2 && tipoDoc && documento) {
-            setCurrentStep(3);
-        } else if (currentStep === 3 && checklistItems.every(() => true)) { // Asumiendo que la checklist siempre está "llena" para avanzar
-            setCurrentStep(4);
-        } else if (currentStep === 4) { // Después de los detalles, mostrar el botón
-            setCurrentStep(5);
-        }
-    }, [numeroInterno, tipoDoc, documento, currentStep]);
+        // Mostrar Tipo de Documento cuando se ingresa algo en Número Interno
+        setShowTipoDoc(numeroInterno.length > 3);
+    }, [numeroInterno]);
+
+    useEffect(() => {
+        // Mostrar Número de Documento cuando se selecciona Tipo de Documento
+        setShowNumeroDoc(tipoDoc !== '');
+    }, [tipoDoc]);
+
+    useEffect(() => {
+        // Mostrar Nombre y Checklist cuando se ingresan al menos 5 dígitos en Número de Documento
+        setShowNombreChecklist(documento.length >= 5);
+    }, [documento]);
+
+    useEffect(() => {
+        // Mostrar botón Enviar cuando todos los items de la checklist están marcados
+        setShowEnviarBoton(checkedItems.every(item => item));
+    }, [checkedItems]);
+
+    const handleChecklistItemChange = (index: number) => {
+        const newCheckedItems = [...checkedItems];
+        newCheckedItems[index] = !newCheckedItems[index];
+        setCheckedItems(newCheckedItems);
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if (!checkedItems.every(item => item)) {
+            alert('Por favor, complete todos los puntos de la checklist antes de enviar.');
+            return;
+        }
         alert(`Formulario enviado.\nNúmero Interno: ${numeroInterno}\nDocumento: ${tipoDoc} ${documento}\nDetalles: ${detalles}`);
         onBackToMenu();
     }
 
     // --- LÓGICA PARA MOSTRAR LA INFORMACIÓN CONTEXTUAL ---
     const showPlacaSugerida = numeroInterno.length === 4;
-    const showNombreSugerido = tipoDoc && documento;
+    const showNombreSugerido = documento.length >= 5; // Ahora depende de 5 dígitos en documento
     // Generamos una placa aleatoria basada en el número interno
     const placaSugerida = `ABC-123`;
     const nombreSugerido = "Juan Perez"; // Nombre de ejemplo
@@ -84,8 +108,8 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
     
 
     return (
-        <div className='w-full h-full max-w-md mx-none p-4 space-y-6 bg-white-100'>
-            <div className="w-full h-full bg-white rounded-2xl shadow-lg flex flex-col overflow-hidden">
+        <div className='w-full h-screen max-w-md mx-none p-4 space-y-6 bg-white-100 overflow-hidden'>
+            <div className="w-full h-screen bg-white rounded-2xl shadow-lg flex flex-col overflow-hidden">
                 {/* --- ENCABEZADO ACTUALIZADO --- */}
                 <header className="relative bg-blue-500 text-white p-4 flex items-center justify-center flex-shrink-0  rounded-2xl shadow-lg">
                     <button
@@ -106,7 +130,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                     <form id="alistamiento-form" onSubmit={handleSubmit} className="space-y-5">
 
                         {/* Campo Número Interno con icono y lógica */}
-                        <AnimatedDiv show={currentStep >= 1}>
+                        <AnimatedDiv show={true}> {/* Siempre visible */}
                             <div>
                                 <label htmlFor="numero-interno" className="block text-sm font-semibold text-gray-600 mb-1">
                                     Número Interno
@@ -136,7 +160,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                         </AnimatedDiv>
 
                         {/* Campo Tipo de Documento con icono */}
-                        <AnimatedDiv show={currentStep >= 2}>
+                        <AnimatedDiv show={showTipoDoc}>
                             <div>
                                 <label htmlFor="tipoDoc" className="block text-sm font-semibold text-gray-600 mb-1">
                                     Tipo de Documento
@@ -162,7 +186,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                         </AnimatedDiv>
 
                         {/* Campo Número de Documento con icono y lógica */}
-                        <AnimatedDiv show={currentStep >= 2}>
+                        <AnimatedDiv show={showNumeroDoc}>
                             <div>
                                 <label htmlFor="documento" className="block text-sm font-semibold text-gray-600 mb-1">
                                     Número de Documento
@@ -191,15 +215,21 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                         </AnimatedDiv>
 
                         {/* Checklist (sin cambios) */}
-                        <AnimatedDiv show={currentStep >= 3}>
+                        <AnimatedDiv show={showNombreChecklist}>
                             <div className="bg-gray-50 p-5 rounded-xl border border-gray-200">
                                 <h3 className="text-center text-blue-600 font-bold text-lg mb-4">
                                     Checklist Actividades Minimas
                                 </h3>
                                 <div className="space-y-3">
-                                    {checklistItems.map(item => (
+                                    {checklistItems.map((item, index) => (
                                         <label key={item} className="flex items-center gap-3 text-gray-700 cursor-pointer">
-                                            <input type="checkbox" id={item} className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                                            <input 
+                                                type="checkbox" 
+                                                id={item} 
+                                                checked={checkedItems[index]}
+                                                onChange={() => handleChecklistItemChange(index)}
+                                                className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" 
+                                            />
                                             {item}
                                         </label>
                                     ))}
@@ -208,7 +238,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                         </AnimatedDiv>
 
                         {/* --- FUNCIONALIDAD DE DETALLES --- */}
-                        <AnimatedDiv show={currentStep >= 4}>
+                        <AnimatedDiv show={showNombreChecklist}> {/* Mostrar detalles junto con nombre y checklist */}
                             <div className="pt-2">
                                 <button
                                     type="button"
@@ -233,7 +263,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                 </main>
 
                 <footer className="p-6 flex justify-center flex-shrink-0 bg-white border-t border-gray-100">
-                    <AnimatedDiv show={currentStep >= 5}>
+                    <AnimatedDiv show={showEnviarBoton}>
                         <button type="submit" form="alistamiento-form" className="w-full max-w-xs py-3 px-8 text-lg font-semibold text-white bg-blue-500 rounded-full shadow-md hover:bg-blue-600 transition-all">
                             Enviar Alistamiento
                         </button>

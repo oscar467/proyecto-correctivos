@@ -57,7 +57,8 @@ const CaptchaScreen: React.FC<CaptchaScreenProps> = ({ onNext, onReturnToNitScre
     return (
         <>
             <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
-                <img className="w-full mx-auto text-blue-600 rounded-lg shadow-xl  border-blue-500 p-4 mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
+                <img className="w-full mx-auto text-blue-600 rounded-full shadow-xl mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
+                <img className="w-full px-8 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_SuperTransporte" />
                 <p className="text-blue-800 font-semibold">Selecciona la imagen que contenga un bus para continuar.</p>
                 {error && !showAttemptsModal && <p className="text-red-500 font-semibold text-sm">Selección incorrecta. Inténtalo de nuevo.</p>}
                 <div className="grid grid-cols-3 gap-4">
@@ -80,7 +81,6 @@ const CaptchaScreen: React.FC<CaptchaScreenProps> = ({ onNext, onReturnToNitScre
                 >
                     Confirmar
                 </button>
-                <img className="h-16 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_Calisoft" />
             </div>
 
             {showAttemptsModal && (
