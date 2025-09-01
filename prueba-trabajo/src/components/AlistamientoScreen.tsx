@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { LicensePlateIcon, IdCardIcon } from './Icons'; // Importamos los nuevos iconos
 
 // Icono para el botón de "Volver"
@@ -63,8 +63,9 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
 
     // Lógica para controlar la visibilidad de los campos
     useEffect(() => {
-        // Mostrar Tipo de Documento cuando se ingresa algo en Número Interno
-        setShowTipoDoc(numeroInterno.length > 3);
+        const isNumeroInternoCompleto = numeroInterno.length === 4 && !isNaN(Number(numeroInterno.charAt(0)));
+        const isPlacaCompleta = numeroInterno.length === 6 && /[A-Z]/.test(numeroInterno.charAt(0));
+        setShowTipoDoc(isNumeroInternoCompleto || isPlacaCompleta);
     }, [numeroInterno]);
 
     useEffect(() => {
@@ -88,6 +89,46 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
         setCheckedItems(newCheckedItems);
     };
 
+    const handleNumeroInternoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let value = e.target.value.toUpperCase(); // Convertir a mayúsculas para placas
+
+        if (value.length === 0) {
+            setNumeroInterno('');
+            return;
+        }
+
+        const firstChar = value.charAt(0);
+
+        if (!isNaN(Number(firstChar))) { // Empieza con número (Número Interno)
+            // Permitir solo dígitos y máximo 4 caracteres
+            value = value.replace(/\D/g, '').substring(0, 4);
+        } else if (/[A-Z]/.test(firstChar)) { // Empieza con letra (Placa)
+            // Primeros 3 caracteres letras, siguientes números, máximo 6 caracteres
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i < 3) { // Primeros 3 caracteres
+                    if (/[A-Z]/.test(value[i])) {
+                        formattedValue += value[i];
+                    } else {
+                        break; // Si no es letra, detener
+                    }
+                } else { // Caracteres restantes
+                    if (!isNaN(Number(value[i]))) {
+                        formattedValue += value[i];
+                    } else {
+                        break; // Si no es número, detener
+                    }
+                }
+                if (formattedValue.length >= 6) break; // Máximo 6 caracteres
+            }
+            value = formattedValue;
+        } else {
+            // Si el primer carácter no es número ni letra, limpiar el input
+            value = '';
+        }
+        setNumeroInterno(value);
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!checkedItems.every(item => item)) {
@@ -99,10 +140,21 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
     }
 
     // --- LÓGICA PARA MOSTRAR LA INFORMACIÓN CONTEXTUAL ---
-    const showPlacaSugerida = numeroInterno.length === 4;
+    const isNumeroInterno = numeroInterno.length > 0 && !isNaN(Number(numeroInterno.charAt(0)));
+    const isPlaca = numeroInterno.length > 0 && /[A-Z]/.test(numeroInterno.charAt(0));
+
+    const showPlacaSugerida = (isNumeroInterno && numeroInterno.length === 4) || (isPlaca && numeroInterno.length === 6);
+
+    const placaSugeridaTexto = useMemo(() => {
+        if (isNumeroInterno) {
+            return `Placa: ABC123`;
+        } else if (isPlaca) {
+            return `Número Interno: 1234`;
+        }
+        return '';
+    }, [numeroInterno, isNumeroInterno, isPlaca]);
+
     const showNombreSugerido = documento.length >= 5; // Ahora depende de 5 dígitos en documento
-    // Generamos una placa aleatoria basada en el número interno
-    const placaSugerida = `ABC-123`;
     const nombreSugerido = "Juan Perez"; // Nombre de ejemplo
 
     
@@ -133,7 +185,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                         <AnimatedDiv show={true}> {/* Siempre visible */}
                             <div>
                                 <label htmlFor="numero-interno" className="block text-sm font-semibold text-gray-600 mb-1">
-                                    Número Interno
+                                    Número Interno/Placa
                                 </label>
                                 <div className="relative">
                                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -143,17 +195,16 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                                         type="text"
                                         id="numero-interno"
                                         required
-                                        maxLength={4}
-                                        placeholder="0123"
+                                        placeholder="0123/ABC123"
                                         value={numeroInterno}
-                                        onChange={(e) => setNumeroInterno(e.target.value.replace(/\D/g, ''))}
+                                        onChange={handleNumeroInternoChange}
                                         className="w-full pl-10 px-4 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
                                 {/* Caja de información para placa sugerida */}
                                 {showPlacaSugerida && (
                                     <div className="mt-2 p-2 bg-gray-100 text-blue-600 text-sm font-semibold rounded-lg text-center transition-all duration-300">
-                                        Placa relacionada: {placaSugerida}
+                                        {placaSugeridaTexto}
                                     </div>
                                 )}
                             </div>

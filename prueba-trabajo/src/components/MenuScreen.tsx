@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MantenimientoCorrectivoIcon, IconoCheckList } from './Icons'; // Importar desde Icons.tsx
 
 interface MenuScreenProps {
@@ -9,6 +9,14 @@ interface MenuScreenProps {
 }
 
 const MenuScreen: React.FC<MenuScreenProps> = ({ username, companyName, onLogout, onNavigateToAlistamiento }) => {
+  const mainRef = useRef<HTMLElement>(null); // Referencia al elemento main
+
+  useEffect(() => {
+    // Asegura que el scroll esté al inicio cuando el componente se monta
+    if (mainRef.current) {
+      mainRef.current.scrollTo(0, 0);
+    }
+  }, []);
   
   const menuOptions = [
     { label: 'Mantenimiento Preventivo', icon: '🔧', action: () => alert('Función no implementada'), implemented: false },
@@ -22,7 +30,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ username, companyName, onLogout
   companyName = 'Empresa De Prueba';
 
   return (
-    <div className="w-full max-w-md  h-screen flex flex-col p-4 gap-6 space-y-6 bg-white-100 overflow-hidden">
+    <div className="w-full max-w-md h-screen flex flex-col p-4 gap-6 space-y-6 bg-white-100"> {/* Eliminado overflow-hidden */}
       <div className="w-full h-full flex flex-col gap-4 bg-white rounded-2xl shadow-lg">
       {/* --- HEADER CARD --- */}
         <header className="bg-blue-500 text-white p-5 rounded-2xl flex items-center gap-4 shadow-lg flex-shrink-0">
@@ -36,7 +44,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ username, companyName, onLogout
         </header>
 
         {/* --- MENU GRID --- */}
-        <main className="grid grid-cols-2 gap-4 flex-grow p-4 overflow-y-auto">
+        <main ref={mainRef} className="grid grid-cols-2 gap-4 flex-grow p-4 overflow-y-auto">
           {menuOptions.map(option => (
             <div 
               key={option.label}

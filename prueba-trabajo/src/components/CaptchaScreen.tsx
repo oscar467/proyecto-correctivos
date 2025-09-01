@@ -55,7 +55,7 @@ const CaptchaScreen: React.FC<CaptchaScreenProps> = ({ onNext, onReturnToNitScre
     };
 
     return (
-        <>
+        <div className="w-full h-screen flex items-center justify-center p-4 overflow-y-auto"> {/* Contenedor para centrar y permitir scroll */}
             <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
                 <img className="w-full mx-auto text-blue-600 rounded-full shadow-xl mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
                 <img className="w-full px-8 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_SuperTransporte" />
@@ -91,7 +91,7 @@ const CaptchaScreen: React.FC<CaptchaScreenProps> = ({ onNext, onReturnToNitScre
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 }; // Cierre del componente CaptchaScreen
 
