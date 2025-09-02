@@ -3,9 +3,10 @@ import {
     MantenimientoCorrectivoIcon,
     IconoCheckList,
     MantenimientoPreventivoIcon,
-    UserIcon,
-    EmpresaIcon,
+    FamiliaIcon
+
 } from "./Icons"; // Importar desde Icons.tsx
+import { PiUserCircleFill, PiBuildingOfficeFill } from "react-icons/pi";
 
 interface MenuScreenProps {
     username: string;
@@ -63,7 +64,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({
         },
         {
             label: "Autorización de Menores",
-            icon: "👨‍👩‍👧",
+            icon: <FamiliaIcon className="w-10 h-10" />,
             action: () => alert("Función no implementada"),
             implemented: false,
         },
@@ -100,11 +101,11 @@ const MenuScreen: React.FC<MenuScreenProps> = ({
                     </div>
                     <div className="flex-grow md:w-full flex flex-col justify-around p-2">
                         <h2 className="font-bold md:text-2xl lg:text-xl flex flex-row items-center">
-                            {/* <EmpresaIcon className="w-6 h-6 mr-2" />{" "} */}
+                            <PiBuildingOfficeFill  className="w-6 h-6 text-white mr-2" />
                             {companyName}
                         </h2>
                         <p className="text-blue-100 text-sm flex flex-row items-center font-bold">
-                            {/* <UserIcon className="w-6 h-6 mr-2" />  */}
+                            <PiUserCircleFill  className="w-6 h-6 text-white mr-2" />
                             {username}
                         </p>
                     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserIcon, LockIcon } from './Icons'; // Importamos iconos
+import {  LockIcon } from './Icons'; // Importamos iconos
 import { PiUserCircleFill } from "react-icons/pi";
 
 

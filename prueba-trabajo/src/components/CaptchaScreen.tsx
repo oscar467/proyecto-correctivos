@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { BusIcon, WrongIcon } from './Icons'; // Importamos iconos
 
 interface CaptchaScreenProps {
@@ -12,6 +12,22 @@ const CaptchaScreen: React.FC<CaptchaScreenProps> = ({ onNext, onReturnToNitScre
     const [captchaKey, setCaptchaKey] = useState(0); // Nuevo estado para forzar el re-render del captcha
     const [attempts, setAttempts] = useState(0); // Contador de intentos fallidos
     const [showAttemptsModal, setShowAttemptsModal] = useState(false); // Estado para mostrar el modal
+
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+            const userAgent = navigator.userAgent;
+            const mobileRegex =
+                /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|rim)|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i;
+            const tabletRegex = /android|ipad|playbook|silk/i;
+    
+            if (mobileRegex.test(userAgent) || tabletRegex.test(userAgent)) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        }, []);
+
 
     // Hacemos que la posición del bus sea aleatoria cada vez
     const { items, correctItemIndex } = useMemo(() => {
@@ -55,7 +71,7 @@ const CaptchaScreen: React.FC<CaptchaScreenProps> = ({ onNext, onReturnToNitScre
     };
 
     return (
-        <div className="w-full h-screen flex items-center justify-center overflow-y-auto mt-16"> {/* Contenedor para centrar y permitir scroll */}
+        <div className={`w-full h-screen flex items-center justify-center overflow-y-auto ${isMobile ? 'mt-16' : ''}`}> {/* Contenedor para centrar y permitir scroll */}
             <div className="w-full md:max-w-md lg:max-w-lg p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
                 <img className="w-full mx-auto text-blue-600 rounded-full shadow-xl mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
                 <img className="w-full px-8 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_SuperTransporte" />
