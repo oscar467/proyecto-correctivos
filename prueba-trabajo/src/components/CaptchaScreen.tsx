@@ -41,7 +41,7 @@ const CaptchaScreen: React.FC<CaptchaScreenProps> = ({ onNext, onReturnToNitScre
             const newAttempts = attempts + 1;
             setAttempts(newAttempts);
 
-            if (newAttempts >= 3) {
+            if (newAttempts >= 1) {
                 setShowAttemptsModal(true);
                 setTimeout(() => {
                     setShowAttemptsModal(false);
