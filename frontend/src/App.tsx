@@ -70,7 +70,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-full h-screen bg-gray-100 p-4 lg:h-screen content-center bg-blue-100">
+    <div className="flex flex-col justify-center items-center min-h-full h-screen bg-gray-100 lg:h-screen content-center bg-blue-100">
         {renderView()}
     </div>
   );

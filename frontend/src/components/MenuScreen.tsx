@@ -86,7 +86,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({
     companyName = "Empresa De Prueba";
 
     return (
-        <div className="w-full md:max-w-md lg:max-w-full lg:w-4/5  h-screen flex flex-col space-y-6 bg-white-100 overflow-hidden">
+        <div className={`w-full md:max-w-md lg:max-w-full lg:w-4/5  h-screen flex flex-col space-y-6 bg-white-100 overflow-hidden ${isMobile ? "lg:w-full" : ""}`}>
             <div
                 className={`w-full h-full flex flex-col gap-4 bg-white rounded-2xl shadow-lg md:max-h-[calc(100%-5%)] lg:max-h-full lg:h-full ${
                     isMobile ? "mt-20" : ""

@@ -71,42 +71,44 @@ const CaptchaScreen: React.FC<CaptchaScreenProps> = ({ onNext, onReturnToNitScre
     };
 
     return (
-        <div className={`w-full h-screen flex items-center justify-center overflow-y-auto ${isMobile ? 'mt-16' : ''}`}> {/* Contenedor para centrar y permitir scroll */}
-            <div className="w-full md:max-w-md lg:max-w-lg p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
-                <img className="w-full mx-auto text-blue-600 rounded-full shadow-xl mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
-                <img className="w-full px-8 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_SuperTransporte" />
-                <p className="text-blue-800 font-semibold">Selecciona la imagen que contenga un bus para continuar.</p>
-                {error && !showAttemptsModal && <p className="text-red-500 font-semibold text-sm">Selección incorrecta. Inténtalo de nuevo.</p>}
-                <div className="grid grid-cols-3 gap-4">
-                    {items.map((item, index) => (
-                        <div
-                            key={index}
-                            onClick={() => handleSelect(index)}
-                            className={`flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 aspect-square ${
-                                selected === index ? 'border-blue-500 bg-blue-100 ring-2 ring-blue-500' : 'border-gray-200 bg-gray-50'
-                            }`}
-                        >
-                            {item}
-                        </div>
-                    ))}
-                </div>
-                <button
-                    onClick={handleSubmit}
-                    disabled={selected === null || showAttemptsModal}
-                    className="w-auto px-12 py-3 text-lg font-semibold text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300"
-                >
-                    Confirmar
-                </button>
-            </div>
-
-            {showAttemptsModal && (
-                <div className="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white p-8 rounded-lg shadow-xl text-center border-2 border-red-600">
-                        <h3 className="text-xl font-bold text-red-600 mb-4">¡Exceso de Intentos!</h3>
-                        <p className="text-gray-700">Has excedido el número de intentos permitidos. Serás redirigido a la pantalla de NIT.</p>
+        <div className="flex items-center justify-center min-h-screen min-w-full p-4 bg-blue-100">
+            <div className={`w-full h-screen flex items-center justify-center overflow-y-auto ${isMobile ? 'mt-16' : ''}`}> {/* Contenedor para centrar y permitir scroll */}
+                <div className="w-full md:max-w-md lg:max-w-lg p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
+                    <img className="w-full mx-auto text-blue-600 rounded-full shadow-xl mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
+                    <img className="w-full px-8 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_SuperTransporte" />
+                    <p className="text-blue-800 font-semibold">Selecciona la imagen que contenga un bus para continuar.</p>
+                    {error && !showAttemptsModal && <p className="text-red-500 font-semibold text-sm">Selección incorrecta. Inténtalo de nuevo.</p>}
+                    <div className="grid grid-cols-3 gap-4">
+                        {items.map((item, index) => (
+                            <div
+                                key={index}
+                                onClick={() => handleSelect(index)}
+                                className={`flex items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 aspect-square ${
+                                    selected === index ? 'border-blue-500 bg-blue-100 ring-2 ring-blue-500' : 'border-gray-200 bg-gray-50'
+                                }`}
+                            >
+                                {item}
+                            </div>
+                        ))}
                     </div>
+                    <button
+                        onClick={handleSubmit}
+                        disabled={selected === null || showAttemptsModal}
+                        className="w-auto px-12 py-3 text-lg font-semibold text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300"
+                    >
+                        Confirmar
+                    </button>
                 </div>
-            )}
+                    
+                {showAttemptsModal && (
+                    <div className="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="bg-white p-8 rounded-lg shadow-xl text-center border-2 border-red-600">
+                            <h3 className="text-xl font-bold text-red-600 mb-4">¡Exceso de Intentos!</h3>
+                            <p className="text-gray-700">Has excedido el número de intentos permitidos. Serás redirigido a la pantalla de NIT.</p>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }; // Cierre del componente CaptchaScreen
