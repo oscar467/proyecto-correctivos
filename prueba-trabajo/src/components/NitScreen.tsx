@@ -51,4 +51,3 @@ const NitScreen: React.FC<NitScreenProps> = ({ onNext }) => {
 };
 
 export default NitScreen;
-
