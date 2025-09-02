@@ -19,7 +19,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
+    <div className="w-full md:max-w-md lg:max-w-lg p-8 space-y-6 bg-white rounded-2xl shadow-lg text-center border-2 border-indigo-200">
       <div className="text-center">
         <img className="w-full mx-auto text-blue-600 rounded-full shadow-xl mb-4" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
         <img className="w-full px-8 p-1 mx-auto text-blue-600 rounded-full shadow-xl" src="/bannerSuperTransporte.png" alt="Logo_SuperTransporte" />

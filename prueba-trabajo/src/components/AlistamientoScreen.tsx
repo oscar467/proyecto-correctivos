@@ -60,6 +60,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
     ];
     // Estado para los checkboxes de la checklist
     const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(checklistItems.length).fill(false));
+    const [fillAllChecked, setFillAllChecked] = useState(false); // Nuevo estado para "llenar todos"
 
     // Lógica para controlar la visibilidad de los campos
     useEffect(() => {
@@ -84,9 +85,24 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
     }, [checkedItems]);
 
     const handleChecklistItemChange = (index: number) => {
+        if (fillAllChecked) { // Si "llenar todos" está marcado, no permitir desmarcar
+            return;
+        }
         const newCheckedItems = [...checkedItems];
         newCheckedItems[index] = !newCheckedItems[index];
         setCheckedItems(newCheckedItems);
+    };
+
+    const handleFillAllChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const isChecked = e.target.checked;
+        setFillAllChecked(isChecked);
+        if (isChecked) {
+            // Si "llenar todos" está marcado, marcar todos los checkboxes individuales
+            setCheckedItems(new Array(checklistItems.length).fill(true));
+        } else {
+            // Si "llenar todos" se desmarca, desmarcar todos los checkboxes individuales
+            setCheckedItems(new Array(checklistItems.length).fill(false));
+        }
     };
 
     const handleNumeroInternoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -160,7 +176,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
     
 
     return (
-        <div className='w-full h-screen max-w-md mx-none p-4 space-y-6 bg-white-100 overflow-hidden'>
+        <div className='w-full h-screen md:max-w-lg lg:max-w-4xl mx-none p-8 pt-0 space-y-6 bg-white-100 overflow-hidden'>
             <div className="w-full h-screen bg-white rounded-2xl shadow-lg flex flex-col overflow-hidden">
                 {/* --- ENCABEZADO ACTUALIZADO --- */}
                 <header className="relative bg-blue-500 text-white p-4 flex items-center justify-center flex-shrink-0  rounded-2xl shadow-lg">
@@ -185,7 +201,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                         <AnimatedDiv show={true}> {/* Siempre visible */}
                             <div>
                                 <label htmlFor="numero-interno" className="block text-sm font-semibold text-gray-600 mb-1">
-                                    Número Interno/Placa
+                                    Número Interno/Placa del vehiculo
                                 </label>
                                 <div className="relative">
                                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -214,7 +230,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                         <AnimatedDiv show={showTipoDoc}>
                             <div>
                                 <label htmlFor="tipoDoc" className="block text-sm font-semibold text-gray-600 mb-1">
-                                    Tipo de Documento
+                                    Tipo de Documento del Conductor
                                 </label>
                                 <div className="relative">
                                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -240,7 +256,7 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
                         <AnimatedDiv show={showNumeroDoc}>
                             <div>
                                 <label htmlFor="documento" className="block text-sm font-semibold text-gray-600 mb-1">
-                                    Número de Documento
+                                    Número de Documento del Conductor
                                 </label>
                                 <div className="relative">
                                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -267,22 +283,40 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
 
                         {/* Checklist (sin cambios) */}
                         <AnimatedDiv show={showNombreChecklist}>
-                            <div className="bg-gray-50 p-5 rounded-xl border border-gray-200">
-                                <h3 className="text-center text-blue-600 font-bold text-lg mb-4">
-                                    Checklist Actividades Minimas
-                                </h3>
-                                <div className="space-y-3">
+                            <div className="bg-gray-50 p-2 rounded-xl border border-gray-200 flex flex-col text-left">
+                                <div className="flex justify-between items-center pl-2">
+                                    <h3 className="text-blue-600 font-bold text-lg mb-4">
+                                        ✅ Actividades Minimas
+                                    </h3>                                    
+                                    {/* Checkbox "Llenar todos" */}
+                                    <div className="flex items-center gap-3 text-gray-700 cursor-pointer justify-between mb-4 bg-blue-100 p-2 rounded-full">
+                                        <span className="text-sm font-semibold">Llenar todos</span>
+                                        <input
+                                            type="checkbox"
+                                            checked={fillAllChecked}
+                                            onChange={handleFillAllChange}
+                                            className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="space-y-3 p-2">
                                     {checklistItems.map((item, index) => (
-                                        <label key={item} className="flex items-center gap-3 text-gray-700 cursor-pointer">
-                                            <input 
-                                                type="checkbox" 
-                                                id={item} 
-                                                checked={checkedItems[index]}
-                                                onChange={() => handleChecklistItemChange(index)}
-                                                className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" 
-                                            />
-                                            {item}
-                                        </label>
+                                        <div className='flex flex-col mb-2'>
+                                            <label key={item} className="flex items-center gap-3 text-gray-700 cursor-pointer justify-between">
+                                                <span className="text-md">
+                                                    {item}
+                                                </span>
+                                                <input 
+                                                    type="checkbox" 
+                                                    id={item} 
+                                                    checked={checkedItems[index]}
+                                                    onChange={() => handleChecklistItemChange(index)}
+                                                    disabled={fillAllChecked}
+                                                    className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" 
+                                                />
+                                            </label>
+                                            <hr className="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700"/>
+                                        </div>
                                     ))}
                                 </div>
                             </div>
@@ -326,4 +360,3 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({ onBackToMenu })
 };
 
 export default AlistamientoScreen;
-

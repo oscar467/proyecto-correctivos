@@ -70,7 +70,7 @@ function App() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-full bg-gray-100 overflow-hidden">
+    <div className="flex justify-center items-center min-h-full bg-gray-100 p-4 lg:h-screen  overflow-hidden">
         {renderView()}
     </div>
   );

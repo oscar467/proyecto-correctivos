@@ -30,16 +30,19 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ username, companyName, onLogout
   companyName = 'Empresa De Prueba';
 
   return (
-    <div className="w-full max-w-md h-screen flex flex-col p-4 gap-6 space-y-6 bg-white-100">
-      <div className="w-full h-full flex flex-col gap-4 bg-white rounded-2xl shadow-lg max-h-[calc(100%-5%)]"> {/* Aplicado max-h con calc */}
-      {/* --- HEADER CARD --- */}
-        <header className="bg-blue-500 text-white p-5 rounded-2xl flex items-center gap-4 shadow-lg flex-shrink-0">
-          <div className="bg-blue-400 w-16 h-16 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+    <div className="w-full md:max-w-md lg:max-w-full lg:w-4/5  h-screen flex flex-col space-y-6 bg-white-100 overflow-hidden">
+      <div className="w-full h-full flex flex-col gap-4 bg-white rounded-2xl shadow-lg md:max-h-[calc(100%-5%)] lg:max-h-full lg:h-full"> {/* Aplicado max-h con calc */}
+        {/* --- HEADER CARD --- */}
+        <header className="bg-blue-500 text-white p-4 rounded-2xl flex items-center gap-4 shadow-lg flex-shrink-0">
+          <div className="bg-blue-400 w-16 h-16 lg:w-24 lg:h-24 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
             Logo
           </div>
-          <div>
-            <h2 className="font-bold text-xl">{companyName}</h2>
+          <div className="flex-grow md:w-full" >
+            <h2 className="font-bold md:text-2xl lg:text-xl">{companyName}</h2>
             <p className="text-blue-100 text-sm">{username}</p>
+          </div>
+          <div className="flex-grow flex justify-end md:w-0 lg:w-full">
+            <img className="text-blue-600 rounded-full shadow-xl bg-white h-20 md:hidden lg:block" src="/logo-calisoft-sas.webp" alt="Logo_Calisoft" />
           </div>
         </header>
 
