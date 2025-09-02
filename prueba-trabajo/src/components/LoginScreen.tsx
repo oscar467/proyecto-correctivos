@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { UserIcon, LockIcon } from './Icons'; // Importamos iconos
+import { PiUserCircleFill } from "react-icons/pi";
+
 
 interface LoginScreenProps {
   onLogin: (username: string) => void;
@@ -29,7 +31,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       <form onSubmit={handleLogin} className="space-y-4">
         <div className="relative">
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-            <UserIcon className="w-5 h-5 text-gray-400" />
+            <PiUserCircleFill  className="w-6 h-6 text-gray-400" />
           </span>
           <input
             type="text"
