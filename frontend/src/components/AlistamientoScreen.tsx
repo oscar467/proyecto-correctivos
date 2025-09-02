@@ -299,30 +299,58 @@ const AlistamientoScreen: React.FC<AlistamientoScreenProps> = ({
                                 >
                                     Tipo de Documento del Conductor
                                 </label>
-                                <div className="relative">
-                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                        <IdCardIcon className="w-5 h-5 text-gray-400" />
-                                    </span>
-                                    <select
-                                        id="tipoDoc"
-                                        required
-                                        value={tipoDoc}
-                                        onChange={(e) =>
-                                            setTipoDoc(e.target.value)
-                                        }
-                                        className="w-full pl-10 px-4 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
-                                    >
-                                        <option value="" disabled>
-                                            Seleccione...
-                                        </option>
-                                        <option value="CC">
+                                <div className="relative flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                                    <div className="flex items-center justify-between w-full md:w-auto p-2 border border-gray-300 rounded-lg">
+                                        <label htmlFor="tipoDocCC" className="flex items-center text-sm font-medium text-gray-700 cursor-pointer mr-2">
+                                            <span className="flex items-center pr-2">
+                                                <IdCardIcon className="w-5 h-5 text-gray-400" />
+                                            </span>
                                             Cédula de Ciudadanía
-                                        </option>
-                                        <option value="CE">
+                                        </label>
+                                        <input
+                                            type="radio"
+                                            id="tipoDocCC"
+                                            name="tipoDoc"
+                                            value="CC"
+                                            checked={tipoDoc === "CC"}
+                                            onChange={(e) => setTipoDoc(e.target.value)}
+                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 ml-auto"
+                                        />
+                                    </div>
+                                    <div className="flex items-center justify-between w-full md:w-auto p-2 border border-gray-300 rounded-lg">
+                                        <label htmlFor="tipoDocCE" className="flex items-center text-sm font-medium text-gray-700 cursor-pointer mr-2">
+                                            <span className="flex items-center pr-2">
+                                                <IdCardIcon className="w-5 h-5 text-gray-400" />
+                                            </span>
                                             Cédula de Extranjería
-                                        </option>
-                                        <option value="PA">Pasaporte</option>
-                                    </select>
+                                        </label>
+                                        <input
+                                            type="radio"
+                                            id="tipoDocCE"
+                                            name="tipoDoc"
+                                            value="CE"
+                                            checked={tipoDoc === "CE"}
+                                            onChange={(e) => setTipoDoc(e.target.value)}
+                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 ml-auto"
+                                        />
+                                    </div>
+                                    <div className="flex items-center justify-between w-full md:w-auto p-2 border border-gray-300 rounded-lg">
+                                        <label htmlFor="tipoDocPA" className="flex items-center text-sm font-medium text-gray-700 cursor-pointer mr-2">
+                                            <span className="flex items-center pr-2">
+                                                <IdCardIcon className="w-5 h-5 text-gray-400" />
+                                            </span>
+                                            Pasaporte
+                                        </label>
+                                        <input
+                                            type="radio"
+                                            id="tipoDocPA"
+                                            name="tipoDoc"
+                                            value="PA"
+                                            checked={tipoDoc === "PA"}
+                                            onChange={(e) => setTipoDoc(e.target.value)}
+                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 ml-auto"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </AnimatedDiv>
